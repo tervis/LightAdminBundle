@@ -1,0 +1,21 @@
+{
+  "name": "tervis/light-admin-bundle",
+  "description": "Symfony bundle for Light Admin features",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Your Name",
+      "email": "your@email.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "LightAdminBundle\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "symfony/framework-bundle": "^6.0 || ^7.0"
+  }
+}
