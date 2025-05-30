@@ -1,6 +1,6 @@
 <?php
 
-namespace Tervis\Bundle\LightAdminBundle\Maker;
+namespace Tervis\LightAdminBundle\Maker;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\String\Slugger\AsciiSlugger;
-use Tervis\Bundle\LightadminBundle\Maker\ClassMaker;
+use Tervis\LightadminBundle\Maker\ClassMaker;
 use function Symfony\Component\String\u;
 
 /**
