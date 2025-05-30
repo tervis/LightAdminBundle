@@ -9,7 +9,22 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class LightAdminBundleExtension extends Extension
+
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Reference;
+
+use Tervis\Bundle\LightAdminBundle\Command\MakeAdminDashboardCommand;
+use Tervis\Bundle\LightAdminBundle\Command\MakeCrudControllerCommand;
+use Tervis\Bundle\LightAdminBundle\Form\CrudFormType;
+use Tervis\Bundle\LightAdminBundle\Maker\ClassMaker;
+use Tervis\Bundle\LightAdminBundle\Twig\Components\Alert;
+use Tervis\Bundle\LightAdminBundle\Twig\Components\SwitchButton;
+
+use Symfony\Component\HttpKernel\KernelInterface;
+
+class LightAdminBundleExtension extends Extension implements PrependExtensionInterface
 {
     public function prepend(ContainerBuilder $builder): void
     {
@@ -57,6 +72,67 @@ class LightAdminBundleExtension extends Extension
         //     $definition = $container->getDefinition('MyVendor\MyBundle\Service\MyService');
         //     $definition->addTag('lightadmin_bundle.feature_enabled');
         // }
+        //$this->registerBasicServices($container);
+    }
+
+    private function registerBasicServices(ContainerBuilder $container): void
+    {
+
+        /*
+        ->set(MakeAdminDashboardCommand::class)->public()
+        ->arg(0, service(ClassMaker::class))
+        ->arg(1, param('kernel.project_dir'))
+        ->tag('console.command')
+
+        ->set(MakeCrudControllerCommand::class)->public()
+        ->arg(0, param('kernel.project_dir'))
+        ->arg(1, service(ClassMaker::class))
+        ->arg(2, service('doctrine'))
+        ->tag('console.command')
+
+        ->set(ClassMaker::class)
+        ->arg(0, service(KernelInterface::class))
+        ->arg(1, param('kernel.project_dir'))
+
+        ->set(CrudFormType::class)
+        ->arg(0, service('form.type_guesser.doctrine'))
+        ->tag('form.type', ['alias' => 'ea_crud'])
+
+        ->set(Alert::class)
+        ->tag('twig.component')
+
+        ->set(SwitchButton::class)
+        ->tag('twig.component')
+*/
+        $container
+            ->register('light_admin.class_maker', ClassMaker::class)
+            ->setArguments([
+                KernelInterface::class,
+                '%kernel.project_dir%',
+            ])
+        ;
+
+
+        $container
+            ->register('light_admin_bundle.make_light_admin_crud', MakeCrudControllerCommand::class)
+            ->setArguments([
+                ClassMaker::class,
+            ])
+            ->addTag('maker.command')
+        ;
+
+        $container
+            ->register('light_admin_bundle.make_light_admin_dashboard', MakeAdminDashboardCommand::class)
+            ->setArguments([
+                ClassMaker::class,
+            ])
+            ->addTag('maker.command')
+        ;
+
+
+
+        $container->register('light_admin.components_alert', Alert::class)->addTag('twig.component');
+        $container->register('light_admin.components_switch_button', SwitchButton::class)->addTag('twig.component');
     }
 
     public function getAlias(): string

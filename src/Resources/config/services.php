@@ -36,6 +36,7 @@ return static function (ContainerConfigurator $container) {
 
         ->set(Alert::class)
         ->tag('twig.component')
+
         ->set(SwitchButton::class)
         ->tag('twig.component')
     ;
