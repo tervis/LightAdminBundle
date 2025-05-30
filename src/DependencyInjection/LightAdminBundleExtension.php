@@ -57,7 +57,7 @@ class LightAdminBundleExtension extends Extension implements PrependExtensionInt
             new FileLocator(__DIR__ . '/../Resources/config')
         );
         // Ladataan myöhemmin palvelutiedostot, reitit jne.
-        $loader->load('services.php');
+        $loader->load('services.yaml');
         // $loader->load('routes.yaml');
     }
 
