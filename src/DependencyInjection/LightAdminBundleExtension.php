@@ -11,6 +11,32 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class LightAdminBundleExtension extends Extension
 {
+    public function prepend(ContainerBuilder $builder): void
+    {
+
+        $builder->prependExtensionConfig('twig_component', [
+            'defaults' => [
+                'Tervis\\Bundle\\LightAdminBundle\\Twig\\Component\\' => [
+                    'template_directory' => '@LightAdminBundle/components/',
+                    'name_prefix' => 'la',
+                ],
+            ],
+        ]);
+
+        $bundleTemplatesOverrideDir = $builder->getParameter('kernel.project_dir') . '/templates/bundles/LightAdminBundle/';
+
+        $builder->prependExtensionConfig('twig', [
+            'paths' => is_dir($bundleTemplatesOverrideDir)
+                ? [
+                    'templates/bundles/LightAdminBundle/' => 'LightAdminBundle',
+                    \dirname(__DIR__) . '/../templates/' => 'LightAdminBundle',
+                ]
+                : [
+                    \dirname(__DIR__) . '/../templates/' => 'LightAdminBundle',
+                ],
+        ]);
+    }
+
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
@@ -36,30 +62,5 @@ class LightAdminBundleExtension extends Extension
     public function getAlias(): string
     {
         return 'light_admin';
-    }
-
-    public function prepend(ContainerBuilder $builder): void
-    {
-        $builder->prependExtensionConfig('twig_component', [
-            'defaults' => [
-                'Tervis\\Bundle\\LightAdminBundle\\Twig\\Component\\' => [
-                    'template_directory' => '@LightAdmin/components/',
-                    'name_prefix' => 'la',
-                ],
-            ],
-        ]);
-
-        $bundleTemplatesOverrideDir = $builder->getParameter('kernel.project_dir') . '/templates/bundles/LightAdminBundle/';
-
-        $builder->prependExtensionConfig('twig', [
-            'paths' => is_dir($bundleTemplatesOverrideDir)
-                ? [
-                    'templates/bundles/LightAdminBundle/' => 'la',
-                    \dirname(__DIR__) . '/../templates/' => 'la',
-                ]
-                : [
-                    \dirname(__DIR__) . '/../templates/' => 'la',
-                ],
-        ]);
     }
 }
