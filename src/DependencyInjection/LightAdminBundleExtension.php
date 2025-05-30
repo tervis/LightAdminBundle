@@ -68,16 +68,18 @@ class LightAdminBundleExtension extends Extension implements PrependExtensionInt
     {
 
         $container
-            ->register('light_admin.make_light_admin_crud', MakeCrudController::class)
-            ->setArguments([])
+            ->register('light_admin.make_lightadmin_crud', MakeCrudController::class)
+            ->setArguments([
+                new Reference('maker.doctrine_helper', ContainerInterface::IGNORE_ON_INVALID_REFERENCE),
+            ])
             ->addTag('maker.command')
         ;
 
-        $container
-            ->register('light_admin.make_light_admin_dashboard', MakeAdminDashboard::class)
-            ->setArguments([])
-            ->addTag('maker.command')
-        ;
+        // $container
+        //     ->register('light_admin.make_lightadmin_dashboard', MakeAdminDashboard::class)
+        //     ->setArguments([])
+        //     ->addTag('maker.command')
+        // ;
     }
 
     public function getAlias(): string
