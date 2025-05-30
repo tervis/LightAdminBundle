@@ -16,7 +16,7 @@ class LightAdminBundleExtension extends Extension implements PrependExtensionInt
     {
         $builder->prependExtensionConfig('twig_component', [
             'defaults' => [
-                'Tervis\\Bundle\\LightAdminBundle\\Twig\\Component\\' => [
+                'Tervis\\LightAdminBundle\\Twig\\Component\\' => [
                     'template_directory' => '@LightAdmin/components/',
                     'name_prefix' => 'la',
                 ],

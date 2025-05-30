@@ -1,0 +1,9 @@
+{# templates/components/Alert.html.twig #}
+{% apply spaceless -%}
+    <div{{ attributes.defaults({class: 'alert alert-' ~ type ~ (withCloseButton ? ' alert-dismissible':''), role: 'alert'}) }}>
+        {% if withCloseButton %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% endif %}
+        {%- block content %}{{ this.message | trans }}{% endblock -%}
+    </div>
+{%- endapply %}

@@ -1,0 +1,55 @@
+{# templates/_components/field_renderer.html.twig #}
+{% macro render_field(item, field) %}
+{% set enumFieldType = enum('Tervis\\Bundle\\LightAdminBundle\\Options\\FieldType') %}
+    {% if field.template is not empty %}
+        {# If a custom template is specified, use it #}
+        {% include field.template with { 'item': item, 'field': field, 'value': item.(field.propertyName) } %}
+    {% else %}
+        {# Otherwise, use default rendering based on fieldType or displayFormat #}
+        {% set value = item.(field.propertyName) %}
+
+        {% if field.fieldType == enumFieldType.Date.value or field.fieldType == enumFieldType.DateTime.value %}
+            {% if value is not null %}
+                {{ value|date(field.displayFormat ?: 'Y-m-d') }}
+            {% endif %}
+        {% elseif field.fieldType == enumFieldType.Boolean.value %}
+            {% if field.getSwitchPath() is not empty %}
+            {% set button_id = field.propertyName ~ '-switch-button-' ~ item.id %}
+            <div class='form-check form-switch' {{stimulus_controller('switch-button')}}>
+            <input class="form-check-input" type="checkbox" role="switch" id="{{ button_id }}" {% if value %}checked{% endif %} {% if field.isDisabled %}disabled{% endif %}
+                data-action="change->switch-button#toggle"
+                data-url="{{ path(field.getSwitchPath(), {id: item.id}) }}"
+                data-property-name="{{ field.propertyName }}"
+                data-token="{{csrf_token(button_id) }}"
+                >
+                {% if field.label is not empty %}
+                <label class="form-check-label" id="{{ button_id }}-label" for="{{ button_id }}">{{ field.label | trans }}</label>
+                {% endif %}
+            </div>
+            {% else %}
+                {% if value %}
+                    <span class="badge bg-success">{{ 'Yes' | trans }}</span>
+                {% else %}
+                    <span class="badge bg-danger">{{ 'No' | trans }}</span>
+                {% endif %}
+            {% endif %}
+        
+        {% elseif field.fieldType == enumFieldType.Money.value %}
+            {% if value is not null %}
+                {{ value|format_currency(field.displayFormat ?: 'EUR') }}
+            {% endif %}
+        {% elseif field.fieldType == enumFieldType.Email.value %}
+            <a href="mailto:{{ value }}">{{ value }}</a>
+        {% elseif field.fieldType == enumFieldType.Text.value %}
+            {{ value|u.truncate(100, '...') }}
+        {% elseif field.fieldType == enumFieldType.Json.value %}
+            {% if value is not null %}
+                {{ value|json_encode }}
+            {% endif %}
+        {# Add more default rendering logic for other types #}
+        {% else %}
+            {# Default to just printing the value #}
+            {{ value }}
+        {% endif %}
+    {% endif %}
+{% endmacro %}

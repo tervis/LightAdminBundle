@@ -1,3 +1,4 @@
+# src/Resources/config/services.yaml
 services:
     # Twig Extension
     light_admin.twig_extension:
@@ -18,7 +19,7 @@ services:
 
     # Controllers
     Tervis\LightAdminBundle\Controller\:
-        resource: '../src/Controller/*'
+        resource: '../../Controller/*'
         autowire: true
         autoconfigure: true
         # arguments:
@@ -26,7 +27,7 @@ services:
 
 
     Tervis\LightAdminBundle\Command\:
-        resource: '../src/Maker/*'
+        resource: '../../Maker/*'
         autowire: true
         autoconfigure: true
         arguments:
