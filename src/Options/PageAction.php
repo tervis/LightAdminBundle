@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Options;
+namespace Tervis\LightAdminBundle\Options;
 
 enum PageAction: string
 {

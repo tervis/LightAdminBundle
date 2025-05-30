@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Field;
+namespace Tervis\LightAdminBundle\Field;
 
-use Tervis\Bundle\LightAdminBundle\Contracts\FieldInterface;
-use Tervis\Bundle\LightAdminBundle\Options\FieldType;
-use Tervis\Bundle\LightAdminBundle\Options\PageAction;
+use Tervis\LightAdminBundle\Contracts\FieldInterface;
+use Tervis\LightAdminBundle\Options\FieldType;
+use Tervis\LightAdminBundle\Options\PageAction;
 
 class Field implements FieldInterface
 {

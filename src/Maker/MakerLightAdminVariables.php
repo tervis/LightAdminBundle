@@ -1,6 +1,6 @@
 <?php
 
-namespace Tervis\Bundle\LightAdminBundle\Maker;
+namespace Tervis\LightAdminBundle\Maker;
 
 use Symfony\Bundle\MakerBundle\Util\ClassNameDetails;
 use Symfony\Bundle\MakerBundle\Util\UseStatementGenerator;

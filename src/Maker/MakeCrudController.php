@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Maker;
+namespace Tervis\LightAdminBundle\Maker;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
@@ -17,14 +17,11 @@ use Symfony\Bundle\MakerBundle\Validator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Tervis\LightAdminBundle\Contracts\AbstractCrudController;
 
 /**
  * Generates the PHP class needed to define a CRUD controller.
@@ -115,7 +112,7 @@ EOF);
             Route::class,
             Request::class,
             Response::class,
-            'Tervis\LightAdminBundle\Contratcts\AbstractCrudController'
+            AbstractCrudController::class
         ]);
 
         $variables = new MakerLightAdminVariables(
@@ -134,15 +131,5 @@ EOF);
         $generator->writeChanges();
 
         $this->writeSuccessMessage($io);
-        /*
-        $io->text([
-            'Customize your new field class, then add it to a form:',
-            '',
-            '    <comment>$builder</comment>',
-            '        <comment>// ...</comment>',
-            \sprintf('        <comment>->add(\'%s\', %s::class)</comment>', Str::asLowerCamelCase($entityClassDetails->getShortName()), $classDetails->getShortName()),
-            '    <comment>;</>',
-        ]);
-        */
     }
 }

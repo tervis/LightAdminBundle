@@ -1,6 +1,6 @@
 <?php
 
-namespace Tervis\Bundle\LightAdminBundle\Field;
+namespace Tervis\LightAdminBundle\Field;
 
 class FieldTypeMapper
 {

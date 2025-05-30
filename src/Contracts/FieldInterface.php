@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Contracts;
+namespace Tervis\LightAdminBundle\Contracts;
 
 interface FieldInterface
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Dto;
+namespace Tervis\LightAdminBundle\Dto;
 
-use Tervis\Bundle\LightAdminBundle\Options\PageAction;
+use Tervis\LightAdminBundle\Options\PageAction;
 
 class Crud
 {

@@ -2,26 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\DependencyInjection;
+namespace Tervis\LightAdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-
-
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Reference;
-
-use Tervis\Bundle\LightAdminBundle\Maker\MakeAdminDashboard;
-use Tervis\Bundle\LightAdminBundle\Maker\MakeCrudController;
-use Tervis\Bundle\LightAdminBundle\Form\CrudFormType;
-use Tervis\Bundle\LightAdminBundle\Maker\ClassMaker;
-use Tervis\Bundle\LightAdminBundle\Twig\Components\Alert;
-use Tervis\Bundle\LightAdminBundle\Twig\Components\SwitchButton;
 
 class LightAdminBundleExtension extends Extension implements PrependExtensionInterface
 {

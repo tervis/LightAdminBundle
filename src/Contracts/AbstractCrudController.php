@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Contracts;
+namespace Tervis\LightAdminBundle\Contracts;
 
-use Tervis\Bundle\LightAdminBundle\Dto\Crud;
-use Tervis\Bundle\LightAdminBundle\Dto\Pagination;
-use Tervis\Bundle\LightAdminBundle\Form\CrudFormType;
-use Tervis\Bundle\LightAdminBundle\Options\PageAction;
+use Tervis\LightAdminBundle\Dto\Crud;
+use Tervis\LightAdminBundle\Dto\Pagination;
+use Tervis\LightAdminBundle\Form\CrudFormType;
+use Tervis\LightAdminBundle\Options\PageAction;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

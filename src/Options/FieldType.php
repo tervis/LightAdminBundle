@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Options;
+namespace Tervis\LightAdminBundle\Options;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;

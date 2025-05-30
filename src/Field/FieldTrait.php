@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Field;
+namespace Tervis\LightAdminBundle\Field;
 
 trait FieldTrait
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Form;
+namespace Tervis\LightAdminBundle\Form;
 
-use Tervis\Bundle\LightAdminBundle\Field\Field;
-use Tervis\Bundle\LightAdminBundle\Options\FieldType;
+use Tervis\LightAdminBundle\Field\Field;
+use Tervis\LightAdminBundle\Options\FieldType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
