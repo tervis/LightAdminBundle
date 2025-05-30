@@ -48,5 +48,23 @@
     "twig/extra-bundle": "^3.17",
     "twig/html-extra": "^3.17",
     "twig/twig": "^3.20"
-  }
+  },
+  "require-dev": {
+    "doctrine/collections": "^2.0",
+    "doctrine/doctrine-bundle": "^2.4.3",
+    "doctrine/orm": "^3.0",
+    "fakerphp/faker": "^1.22",
+    "mtdowling/jmespath.php": "^2.6",
+    "symfony/form": "^7.0",
+    "symfony/options-resolver": "^7.0",
+    "symfony/framework-bundle": "^7.0",
+    "symfony/maker-bundle": "^1.40",
+    "symfony/phpunit-bridge": "^7.0",
+    "symfony/process": "^7.0",
+    "symfony/security-bundle": "^7.0",
+    "symfony/twig-bundle": "^7.0",
+    "symfony/uid": "^7.0",
+    "twig/twig": "^3.0.4"
+},
+  "minimum-stability": "dev"
 }

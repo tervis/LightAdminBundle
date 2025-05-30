@@ -1,3 +1,0 @@
-<div class="me-2" {{ stimulus_controller('batch-delete', { url: path(path_name), csrfToken: csrf_token(token_key) } )}}>
-	<a href="#" class="btn btn-danger" {{ stimulus_action('batch-delete', 'process', 'click') }}><twig:ux:icon name="bi:trash" class="bi me-2"/>{{ 'Batch delete' | trans }}</a>
-</div>
