@@ -5,7 +5,7 @@
 {% block title %}{{ 'Manage' |trans }} {{ entityName }}{% endblock %}
 
 {% block body %}
-{% set enumPageActions = enum('App\\LightAdmin\\Options\\PageAction') %}
+{% set enumPageActions = enum('Tervis\\Bundle\\LightAdminBundle\\Options\\PageAction') %}
 {% set fields = crud.getFields(enumPageActions.List.value) %}
 {% set options = crud.actions[enumPageActions.List.value].options %}
 {% set filters = crud.filters %}

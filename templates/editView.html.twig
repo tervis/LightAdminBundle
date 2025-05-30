@@ -3,7 +3,7 @@
 {% block title %}{{ (isNew ? 'Create' : 'Edit') | trans }} {{ entityName }}{% endblock %}
 
 {% block body %}
-{% set enumPageActions = enum('App\\LightAdmin\\Options\\PageAction') %}
+{% set enumPageActions = enum('Tervis\\Bundle\\LightAdminBundle\\Options\\PageAction') %}
 {% set action = isNew ? crud.getAction(enumPageActions.New.value) : crud.getAction(enumPageActions.Edit.value) %}
 {% set options = action.options | default([]) %}
 

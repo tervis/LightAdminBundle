@@ -1,7 +1,4 @@
-{#{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success">{{ (button_label|default('Save')) | trans }}</button>
-{{ form_end(form) }}#}
+
 {{ form_start(form) }}
 {% for field in crud_fields %} {# Use crud_fields passed from controller #}
     {% if form[field.propertyName] is defined %}

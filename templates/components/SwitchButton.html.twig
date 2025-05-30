@@ -1,0 +1,38 @@
+{# templates/components/SwitchButton.html.twig #}
+{#
+    This Twig component renders a generic switch button.
+    It uses Stimulus.js for interactive toggling.
+
+    Usage:
+    <div {{ stimulus_controller('switch-button') }}>
+        <twig:switch_button
+            url="{{ path('path_to_my_setting', {slug: 'some_setting'}"
+            id="my_setting_id"
+            token="sample_token"
+            label="Enable Feature"
+            value="{{ app.user.settings.featureEnabled }}"
+            class="mb-4"
+            disabled="{{ user == app.user ? true : false }}"
+        />
+    </div>
+
+    Props:
+    - url (string, required): The name attribute for the hidden input field.
+    - id (string, required): The ID attribute for the switch button and its associated label.
+    - token (string, optional, default: 'switchButton'): The csrf token for request
+    - label (string, optional, default: ''): The label text displayed next to the switch.
+    - value (bool, optional, default: false): The initial boolean value of the switch.
+    - disabled (bool, optional, default: false): Whether the switch is disabled.
+    - class (string, optional, default: ''): Additional CSS classes for the main container.
+#}
+
+<div {{ attributes.defaults({class: 'form-check form-switch' ~ (class ? ' ' ~ class : '') }) }}>
+  <input class="form-check-input" type="checkbox" role="switch" id="{{ id }}" {% if value %}checked{% endif %} {% if disabled %}disabled{% endif %}
+    data-action="change->switch-button#toggle"
+    data-url="{{ url }}"
+    data-token="{{csrf_token(token) }}"
+    >
+    {% if label is not empty %}
+    <label class="form-check-label" id="{{ id }}-label" for="{{ id }}">{{ label | trans }}</label>
+    {% endif %}
+</div>
