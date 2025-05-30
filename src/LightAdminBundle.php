@@ -2,16 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle;
+namespace Tervis\LightAdminBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-class LightAdminBundle extends Bundle
+class LightAdminBundle extends AbstractBundle
 {
     public const VERSION = '0.0.1';
-
-    public function getPath(): string
-    {
-        return \dirname(__DIR__);
-    }
 }
