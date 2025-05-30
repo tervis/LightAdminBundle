@@ -1,54 +1,52 @@
 {
-    "name": "tervis/light-admin-bundle",
-    "description": "Symfony bundle for Light Admin features",
-    "type": "symfony-bundle",
-    "homepage": "https://github.com/tervis/LightAdminBundle",
-    "license": "MIT",
-    "authors": [
-      {
-        "name": "Your Name",
-        "email": "your@email.com"
-      }
-    ],
-    "autoload": {
-      "psr-4": {
-        "Tervis\\Bundle\\LightAdminBundle\\": "src/"
-      }
-    },
-    "autoload-dev": {
-      "psr-4": {
-            "Tervis\\Bundle\\LightAdminBundle\\": "tests/"
-        }
-    },
+  "name": "tervis/lightadmin-bundle",
+  "description": "Symfony bundle for Light Admin features",
+  "type": "symfony-bundle",
+  "homepage": "https://github.com/tervis/LightAdminBundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Your Name",
+      "email": "your@email.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Tervis\\Bundle\\LightAdminBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tervis\\Bundle\\LightAdminBundle\\": "tests/"
+    }
+  },
   "require": {
-    "php": ">=8.2",
-        "ext-json": "*",
-        "doctrine/doctrine-bundle": "^2.5",
-        "doctrine/orm": "^3.0",
-        "symfony/asset": "^7.0",
-        "symfony/cache": "^7.0",
-        "symfony/config": "^7.0",
-        "symfony/dependency-injection": "^7.0",
-        "symfony/deprecation-contracts": "^3.0",
-        "symfony/doctrine-bridge": "^7.0",
-        "symfony/event-dispatcher": "^7.0",
-        "symfony/filesystem": "^7.0",
-        "symfony/form": "^7.0",
-        "symfony/framework-bundle": "^7.0",
-        "symfony/http-foundation": "^7.0",
-        "symfony/http-kernel": "^7.0",
-        "symfony/intl": "^7.0",
-        "symfony/property-access": "^7.0",
-        "symfony/security-bundle": "^7.0",
-        "symfony/string": "^7.0",
-        "symfony/translation": "^7.0",
-        "symfony/twig-bridge": "^7.1.9",
-        "symfony/twig-bundle": "^7.0",
-        "symfony/uid": "^7.0",
-        "symfony/ux-twig-component": "^2.21",
-        "symfony/validator": "^7.0",
-        "twig/extra-bundle": "^3.17",
-        "twig/html-extra": "^3.17",
-        "twig/twig": "^3.20"
+    "php": ">=8.3",
+    "ext-json": "*",
+    "doctrine/doctrine-bundle": "^2.5",
+    "doctrine/orm": "^3.0",
+    "symfony/asset": "^7.0",
+    "symfony/config": "^7.0",
+    "symfony/dependency-injection": "^7.0",
+    "symfony/deprecation-contracts": "^3.0",
+    "symfony/doctrine-bridge": "^7.0",
+    "symfony/filesystem": "^7.0",
+    "symfony/form": "^7.0",
+    "symfony/framework-bundle": "^7.0",
+    "symfony/http-foundation": "^7.0",
+    "symfony/http-kernel": "^7.0",
+    "symfony/intl": "^7.0",
+    "symfony/property-access": "^7.0",
+    "symfony/security-bundle": "^7.0",
+    "symfony/string": "^7.0",
+    "symfony/translation": "^7.0",
+    "symfony/twig-bridge": "^7.1.9",
+    "symfony/twig-bundle": "^7.0",
+    "symfony/uid": "^7.0",
+    "symfony/ux-twig-component": "^2.21",
+    "symfony/validator": "^7.0",
+    "twig/extra-bundle": "^3.17",
+    "twig/html-extra": "^3.17",
+    "twig/twig": "^3.20"
   }
 }
