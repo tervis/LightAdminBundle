@@ -1,6 +1,6 @@
-{% extends '@lightAdmin/_layout.html.twig' %}
+{% extends '@LightAdminBundle/_layout.html.twig' %}
 
-{% import '@lightAdmin/_components/field_renderer.html.twig' as field_renderer %}
+{% import '@LightAdminBundle/_fragments/field_renderer.html.twig' as field_renderer %}
 
 {% block title %}{{ 'Manage' |trans }} {{ entityName }}{% endblock %}
 
@@ -34,7 +34,7 @@
         {% endif %}
 
         {% if batchDelete  %}
-        {{ include('@lightAdmin/_components/batch_delete_button.html.twig', { path_name: crud.getAction(enumPageActions.BatchDelete.value).path, token_key: enumPageActions.BatchDelete.value }, true) }}
+        {{ include('@LightAdminBundle/_fragments/batch_delete_button.html.twig', { path_name: crud.getAction(enumPageActions.BatchDelete.value).path, token_key: enumPageActions.BatchDelete.value }, true) }}
         {% endif %}
 
         {% if crud.getAction(enumPageActions.New.value) is defined %}
@@ -120,7 +120,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            {{ include('@lightAdmin/_partials/pagination.html.twig', {}, true) }}
+            {{ include('@LightAdminBundle/_fragments/pagination.html.twig', {}, true) }}
         </div>
     </div>
 </div>

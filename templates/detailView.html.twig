@@ -1,6 +1,6 @@
-{% extends '@lightAdmin/_layout.html.twig' %}
+{% extends '@LightAdminBundle/_layout.html.twig' %}
 
-{% import '@lightAdmin/_components/field_renderer.html.twig' as field_renderer %}
+{% import '@LightAdminBundle/_components/field_renderer.html.twig' as field_renderer %}
 
 {% block title %}{{ 'Manage' |trans }} {{ entityName }}{% endblock %}
 
@@ -21,7 +21,7 @@
         {% endif %}
 
         {% if enumPageActions.Delete.value in options %}
-            {{ include('@lightAdmin/_components/delete_button.html.twig', {deleteRoute: crud.getAction(enumPageActions.Delete.value).path, entity: entity}, true) }}
+            {{ include('@LightAdminBundle/_fragments/delete_button.html.twig', {deleteRoute: crud.getAction(enumPageActions.Delete.value).path, entity: entity}, true) }}
         {% endif %}
 
     </div>
@@ -48,7 +48,7 @@
 
 <div class="row mt-2">
     <div class="col">
-        {{ include('@lightAdmin/_components/back_to_list.html.twig', {}, true) }}
+        {{ include('@LightAdminBundle/_fragments/back_to_list.html.twig', {}, true) }}
     </div>
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends '@lightAdmin/_layout.html.twig' %}
+{% extends '@LightAdminBundle/_layout.html.twig' %}
 
 {% block title %}{{ (isNew ? 'Create' : 'Edit') | trans }} {{ entityName }}{% endblock %}
 
@@ -11,7 +11,7 @@
 <div class="row d-flex">
     <div class="col d-flex justify-content-end">
     {% if enumPageActions.Delete.value in options %}
-        {{ include('@lightAdmin/_components/delete_button.html.twig', {deleteRoute: crud.getAction(enumPageActions.Delete.value).path, entity: item}, true) }}
+        {{ include('@LightAdminBundle/_fragments/delete_button.html.twig', {deleteRoute: crud.getAction(enumPageActions.Delete.value).path, entity: item}, true) }}
     {% endif %}
     </div>
 </div>
@@ -19,13 +19,13 @@
 
 <div class="row mt-2">
     <div class="col">
-        {{ include('@lightAdmin/_components/form.html.twig', { button_label: (isNew ? 'Create' : 'Update') }, true) }}
+        {{ include('@LightAdminBundle/_fragments/form.html.twig', { button_label: (isNew ? 'Create' : 'Update') }, true) }}
     </div>
 </div>
 
 <div class="row mt-2">
     <div class="col">
-        {{ include('@lightAdmin/_components/back_to_list.html.twig', {}, true) }}
+        {{ include('@LightAdminBundle/_fragments/back_to_list.html.twig', {}, true) }}
     </div>
 </div>
 {% endblock %}

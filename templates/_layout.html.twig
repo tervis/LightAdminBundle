@@ -1,4 +1,4 @@
-{# @lightAdmin/_layout.html.twig #}
+{# @LightAdminBundle/_layout.html.twig #}
 <!DOCTYPE html>
 <html lang="{%- block htmlLang -%}{{ app.request.locale|split('_')[0] }}{%- endblock -%}" class="{%- block html_class -%}h-100{%- endblock -%}" data-bs-theme="{%- block html_theme -%}dark{%- endblock -%}">
     <head>
@@ -17,7 +17,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
 
         {% block head_favicon %}
-        {{ include('@lightAdmin/_partials/favicons.html.twig') }}
+        {{ include('@LightAdminBundle/_partials/favicons.html.twig') }}
         {% endblock %}
         
         {% block head_fonts %}
@@ -35,15 +35,15 @@
         <!-- Page rendered on {{ 'now'|date('Y-m-d H:i:s', "Europe/Helsinki") }} -->
     </head>
 {% block dom %}
-<body id="{%- block body_id -%}lightAdmin{%- endblock -%}" class="{%- block body_class -%}d-flex flex-column h-100{%- endblock -%}">
-{{ include('@lightAdmin/_partials/theme_switch.html.twig') }}
+<body id="{%- block body_id -%}light_admin{%- endblock -%}" class="{%- block body_class -%}d-flex flex-column h-100{%- endblock -%}">
+{{ include('@LightAdminBundle/_partials/theme_switch.html.twig') }}
     <div class="wrapper">
-        {{ include('@lightAdmin/_partials/sidebar.html.twig') }}
+        {{ include('@LightAdminBundle/_partials/sidebar.html.twig') }}
         <div id="wrapper-content">
-            {{ include('@lightAdmin/_partials/navbar.html.twig') }}
+            {{ include('@LightAdminBundle/_partials/navbar.html.twig') }}
             <div class="content">
                 <div class="container-fluid m-1">
-                    {{ include('@lightAdmin/_partials/flash_messages.html.twig') }}
+                    {{ include('@LightAdminBundle/_partials/flash_messages.html.twig') }}
                     <div class="row">
                         <div class="col-md-12 page-header">
                             {% if page_pretitle is defined %}

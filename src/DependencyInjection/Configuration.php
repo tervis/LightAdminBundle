@@ -11,19 +11,17 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('my_vendor_my_bundle');
+        $treeBuilder = new TreeBuilder('light_admin');
         $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
-            ->scalarNode('my_option')
-            ->defaultValue('default_value')
-            ->info('A customizable option for MyBundle')
-            ->end()
-            ->arrayNode('another_setting')
+            ->arrayNode('twig')
             ->children()
-            ->booleanNode('enabled')->defaultFalse()->end()
-            ->integerNode('limit')->defaultValue(10)->end()
+            ->arrayNode('paths')
+            ->addDefaultChildrenIfNoneSet()
+            ->prototype('scalar')->defaultValue(['%kernel.project_dir%/templates/LightAdmin' => 'lightAdmin'])->end()
+            //'%kernel.project_dir%/templates/LightAdmin': lightAdmin
             ->end()
             ->end()
             ->end()
