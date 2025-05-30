@@ -1,0 +1,31 @@
+{% extends '@lightAdmin/_layout.html.twig' %}
+
+{% block title %}{{ (isNew ? 'Create' : 'Edit') | trans }} {{ entityName }}{% endblock %}
+
+{% block body %}
+{% set enumPageActions = enum('App\\LightAdmin\\Options\\PageAction') %}
+{% set action = isNew ? crud.getAction(enumPageActions.New.value) : crud.getAction(enumPageActions.Edit.value) %}
+{% set options = action.options | default([]) %}
+
+{% if isNew == false %}
+<div class="row d-flex">
+    <div class="col d-flex justify-content-end">
+    {% if enumPageActions.Delete.value in options %}
+        {{ include('@lightAdmin/_components/delete_button.html.twig', {deleteRoute: crud.getAction(enumPageActions.Delete.value).path, entity: item}, true) }}
+    {% endif %}
+    </div>
+</div>
+{% endif %}
+
+<div class="row mt-2">
+    <div class="col">
+        {{ include('@lightAdmin/_components/form.html.twig', { button_label: (isNew ? 'Create' : 'Update') }, true) }}
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        {{ include('@lightAdmin/_components/back_to_list.html.twig', {}, true) }}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends '@lightAdmin/_layout.html.twig' %}
+
+{% import '@lightAdmin/_components/field_renderer.html.twig' as field_renderer %}
+
+{% block title %}{{ 'Manage' |trans }} {{ entityName }}{% endblock %}
+
+{% block body %}
+{% set enumPageActions = enum('App\\LightAdmin\\Options\\PageAction') %}
+{% set action = crud.getAction(enumPageActions.Details.value) %}
+{% set fields = action.fields | default([]) %}
+{% set options = action.options | default([]) %}
+{% set entity = item %}
+
+<div class="row d-flex">
+    <div class="col d-flex justify-content-end">
+        {% if enumPageActions.Edit.value in options %}
+            <a href="{{ path(crud.getAction(enumPageActions.Edit.value).path, {'id': entity.id}) }}" class="btn btn-primary text-capitalize">
+                <twig:ux:icon name="bi:pencil" class="bi me-2"/>
+                {{ 'Edit' | trans }}
+            </a>
+        {% endif %}
+
+        {% if enumPageActions.Delete.value in options %}
+            {{ include('@lightAdmin/_components/delete_button.html.twig', {deleteRoute: crud.getAction(enumPageActions.Delete.value).path, entity: entity}, true) }}
+        {% endif %}
+
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    {% for field in fields %}
+                        <tr>
+                            <th class="text-capitalize">{{ field.label | trans }}</th>
+                            <td>
+                                {{ field_renderer.render_field(item, field) }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        {{ include('@lightAdmin/_components/back_to_list.html.twig', {}, true) }}
+    </div>
+</div>
+{% endblock %}
