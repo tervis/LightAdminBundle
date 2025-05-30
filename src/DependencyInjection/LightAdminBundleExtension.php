@@ -23,8 +23,6 @@ use Tervis\Bundle\LightAdminBundle\Maker\ClassMaker;
 use Tervis\Bundle\LightAdminBundle\Twig\Components\Alert;
 use Tervis\Bundle\LightAdminBundle\Twig\Components\SwitchButton;
 
-use Symfony\Component\HttpKernel\KernelInterface;
-
 class LightAdminBundleExtension extends Extension implements PrependExtensionInterface
 {
     public function prepend(ContainerBuilder $builder): void
@@ -54,32 +52,13 @@ class LightAdminBundleExtension extends Extension implements PrependExtensionInt
 
     public function load(array $configs, ContainerBuilder $container): void
     {
-        // $loader = new PhpFileLoader(
-        //     $container,
-        //     new FileLocator(__DIR__ . '/../Resources/config')
-        // );
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../Resources/config')
+        );
         // Ladataan myöhemmin palvelutiedostot, reitit jne.
-        //$loader->load('services.php');
+        $loader->load('services.php');
         // $loader->load('routes.yaml');
-        $this->registerBasicServices($container);
-    }
-
-    private function registerBasicServices(ContainerBuilder $container): void
-    {
-
-        $container
-            ->register('light_admin.make_lightadmin_crud', MakeCrudController::class)
-            ->setArguments([
-                new Reference('maker.doctrine_helper', ContainerInterface::IGNORE_ON_INVALID_REFERENCE),
-            ])
-            ->addTag('maker.command')
-        ;
-
-        // $container
-        //     ->register('light_admin.make_lightadmin_dashboard', MakeAdminDashboard::class)
-        //     ->setArguments([])
-        //     ->addTag('maker.command')
-        // ;
     }
 
     public function getAlias(): string

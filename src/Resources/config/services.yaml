@@ -1,0 +1,42 @@
+services:
+    # Twig Extension
+    light_admin.twig_extension:
+        class: Tervis\Bundle\LightAdminBundle\Twig\LightAdminTwigExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+    
+    light_admin.twig_extension_runtime:
+        class: Tervis\Bundle\LightAdminBundle\Twig\LightAdminTwigExtensionRuntime
+        public: false
+        arguments:
+            - '@Symfony\Component\HttpFoundation\RequestStack'
+        tags:
+            - { name: twig.runtime }
+
+    # ## Just a configurable demo service
+    # light_admin.service:
+    #     class: Danielm\DemoBundle\Service\DemoService
+    #     public: false
+    #     #arguments:
+    #     #  $container: '@service_container'
+    #     #  $configuration: '@light_admin.configuration'
+
+    Tervis\Bundle\LightAdminBundle\Contracts\FieldInterface: '@light_admin.field_interface'
+
+    # Controllers
+    Tervis\Bundle\LightAdminBundle\Controller\:
+        resource: '../src/Controller/*'
+        autowire: true
+        autoconfigure: true
+        # arguments:
+        #   - '@maker.doctrine_helper'
+
+
+    Tervis\Bundle\LightAdminBundle\Command\:
+        resource: '../src/Maker/*'
+        autowire: true
+        autoconfigure: true
+        arguments:
+          - '@maker.doctrine_helper'
+
