@@ -7,8 +7,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Tervis\Bundle\LightAdminBundle\Command\MakeAdminDashboardCommand;
 use Tervis\Bundle\LightAdminBundle\Command\MakeCrudControllerCommand;
+use Tervis\Bundle\LightAdminBundle\Form\CrudFormType;
 use Tervis\Bundle\LightAdminBundle\Maker\ClassMaker;
-use Tervis\Bundle\LigtAdminBundle\Twig\Component\Alert;
+use Tervis\Bundle\LightAdminBundle\Twig\Components\Alert;
+use Tervis\Bundle\LightAdminBundle\Twig\Components\SwitchButton;
 
 return static function (ContainerConfigurator $container) {
 
@@ -33,6 +35,8 @@ return static function (ContainerConfigurator $container) {
         ->tag('form.type', ['alias' => 'ea_crud'])
 
         ->set(Alert::class)
+        ->tag('twig.component')
+        ->set(SwitchButton::class)
         ->tag('twig.component')
     ;
 };

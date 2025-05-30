@@ -35,7 +35,7 @@ class LightAdminBundleExtension extends Extension
 
     public function getAlias(): string
     {
-        return 'tervis_lightadmin_bundle';
+        return 'light_admin';
     }
 
     public function prepend(ContainerBuilder $builder): void
@@ -50,6 +50,7 @@ class LightAdminBundleExtension extends Extension
         ]);
 
         $bundleTemplatesOverrideDir = $builder->getParameter('kernel.project_dir') . '/templates/bundles/LightAdminBundle/';
+
         $builder->prependExtensionConfig('twig', [
             'paths' => is_dir($bundleTemplatesOverrideDir)
                 ? [
