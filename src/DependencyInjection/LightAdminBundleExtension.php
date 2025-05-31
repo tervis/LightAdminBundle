@@ -39,6 +39,7 @@ class LightAdminBundleExtension extends Extension implements PrependExtensionInt
 
     public function load(array $configs, ContainerBuilder $container): void
     {
+        dump('LightAdminBundle Extension loaded');
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__ . '/../Resources/config')

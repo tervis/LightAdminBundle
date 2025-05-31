@@ -7,15 +7,16 @@ services:
         tags:
             - { name: twig.extension }
     
-    light_admin.twig_extension_runtime:
-        class: Tervis\LightAdminBundle\Twig\LightAdminTwigExtensionRuntime
-        public: false
-        arguments:
-            - '@Symfony\Component\HttpFoundation\RequestStack'
-        tags:
-            - { name: twig.runtime }
+    # light_admin.twig_extension_runtime:
+    #     class: Tervis\LightAdminBundle\Twig\LightAdminTwigExtensionRuntime
+    #     public: false
+    #     arguments:
+    #         - '@Symfony\Component\HttpFoundation\RequestStack'
+    #     tags:
+    #         - { name: twig.runtime }
 
-    Tervis\LightAdminBundle\Contracts\FieldInterface: '@light_admin.field_interface'
+    light_admin.field_interface:
+        class: Tervis\LightAdminBundle\Contracts\FieldInterface
 
     # Controllers
     Tervis\LightAdminBundle\Controller\:
@@ -25,11 +26,8 @@ services:
         # arguments:
         #   - '@maker.doctrine_helper'
 
-
-    Tervis\LightAdminBundle\Command\:
-        resource: '../../Maker/*'
-        autowire: true
-        autoconfigure: true
+    light_admin.maker_crud_controller:
+        class: Tervis\LightAdminBundle\Maker\MakeCrudController
         arguments:
           - '@maker.doctrine_helper'
 
