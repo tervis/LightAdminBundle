@@ -1,6 +1,6 @@
 {# templates/_components/field_renderer.html.twig #}
 {% macro render_field(item, field) %}
-{% set enumFieldType = enum('Tervis\\Bundle\\LightAdminBundle\\Options\\FieldType') %}
+{% set enumFieldType = enum('Tervis\\LightAdminBundle\\Options\\FieldType') %}
     {% if field.template is not empty %}
         {# If a custom template is specified, use it #}
         {% include field.template with { 'item': item, 'field': field, 'value': item.(field.propertyName) } %}

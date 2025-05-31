@@ -62,10 +62,10 @@ abstract class AbstractCrudController extends AbstractController
         $this->redirectRoute = $redirectRoute;
 
         // Default templates, can be overridden
-        $this->listTemplate = '@LightAdminBundle/listView.html.twig';
-        $this->editTemplate = '@LightAdminBundle/editView.html.twig';
-        $this->newTemplate = '@LightAdminBundle/editView.html.twig';
-        $this->detailsTemplate = '@LightAdminBundle/detailView.html.twig';
+        $this->listTemplate = '@LightAdmin/listView.html.twig';
+        $this->editTemplate = '@LightAdmin/editView.html.twig';
+        $this->newTemplate = '@LightAdmin/editView.html.twig';
+        $this->detailsTemplate = '@LightAdmin/detailView.html.twig';
     }
 
     protected function getFields(string $action): array
