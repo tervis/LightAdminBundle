@@ -1,0 +1,12 @@
+{# @var field \Tervis\LightAdminBundle\Field\Field #}
+{% set button_id = field.propertyName ~ '-switch-button-' ~ item.id %}
+<div class='form-check form-switch'>
+    <input class="form-check-input" type="checkbox" role="switch" id="{{ button_id }}" {% if value %}checked{% endif %} {% if field.isDisabled %}disabled{% endif %}
+        data-toggle-url="{{ path(field.getSwitchPath(), {id: item.id}) }}"
+        data-property-name="{{ field.propertyName }}"
+        data-token="{{csrf_token(button_id) }}"
+        >
+    {% if field.label is not empty %}
+    <label class="form-check-label" id="{{ button_id }}-label" for="{{ button_id }}">{{ field.label | trans }}</label>
+    {% endif %}
+</div>

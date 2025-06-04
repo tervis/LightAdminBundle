@@ -2,58 +2,43 @@
 
 declare(strict_types=1);
 
-namespace Tervis\Bundle\LightAdminBundle\Twig\Runtime;
+namespace Tervis\LightAdminBundle\Twig\Runtime;
 
-use Symfony\Component\HttpFoundation\RequestStack;
+use App\Menu\MenuFactory;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Extension\RuntimeExtensionInterface;
+use Twig\Environment;
 
 class LightAdminTwigExtensionRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(
-        private RequestStack $requestStack
-    ) {}
+    private Environment $twigEnvironment; // Declare the Twig Environment
 
-    /**
-     * Checks if the given route name matches the currently active route.
-     * This function implicitly handles routes with parameters as it only compares the route name,
-     * not the full URL path. For example, if the current route is 'app_product_show' (for /products/123),
-     * calling is_active_route('app_product_show') will return a string 'active'.
-     * 
-     * @param string $routeName The name of the route to check against (e.g., 'app_home', 'product_detail').
-     * @param string $activeClass Defaults to 'active'
-     * @return string Return 'active' or empty if not active
-     */
-    public function isActiveRoute(string $routeName, string $activeClass = 'active'): string
+    public function __construct(Environment $twigEnvironment) // Inject it
     {
-        $request = $this->requestStack->getCurrentRequest();
-        if (null === $request) {
-            return '';
-        }
-
-        // Get the name of the currently matched route from the request attributes.
-        $currentRoute = $request->attributes->get('_route');
-
-        return $currentRoute === $routeName ? $activeClass : '';
+        $this->twigEnvironment = $twigEnvironment; // Assign it
     }
 
-    /**
-     * Checks if the currently active route name starts with the given prefix.
-     * This is useful for highlighting entire sections of a navigation (e.g., 'admin_' for all admin routes).
-     *
-     * @param string $prefix The prefix to check against (e.g., 'admin_', 'blog_').
-     * @param string $activeClass Defaults to 'active'
-     * @return string Return 'active' or empty if not active
-     */
-    public function isActiveRoutePrefix(string $prefix, string $activeClass = 'active'): string
+    public function renderMainMenu(string $currentPath): string
     {
-        $request = $this->requestStack->getCurrentRequest();
-        if (null === $request) {
+        if (!class_exists(MenuFactory::class)) {
             return '';
         }
 
-        $currentRoute = $request->attributes->get('_route');
+        $mainMenu = MenuFactory::createMainMenu();
 
-        // Check if the current route name starts with the provided prefix.
-        return (is_string($currentRoute) && str_starts_with($currentRoute, $prefix)) ? $activeClass : '';
+        return $this->twigEnvironment->render('@LightAdmin/menus/main_menu.html.twig', ['menu' => $mainMenu, 'currentPath' => $currentPath]);
+    }
+
+    public function renderUserMenu(?UserInterface $user = null): string
+    {
+        if (!class_exists(MenuFactory::class) || !$user) {
+            return '';
+        }
+
+        $userMenu = MenuFactory::createUserMenu($user);
+
+        return $this->twigEnvironment->render('@LightAdmin/menus/user_menu.html.twig', [
+            'userMenu' => $userMenu,
+        ]);
     }
 }

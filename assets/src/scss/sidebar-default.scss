@@ -1,0 +1,68 @@
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    transition: all .3s;
+    border-right: 1px solid rgba(0, 0, 0, .175)
+}
+
+#sidebar.active {
+    margin-left: -250px
+}
+
+#sidebar .sidebar-header {
+    padding: .4rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, .175);
+    max-height: 58px;
+    min-height: 58px;
+    background: #323a46;
+    color: #fff
+}
+
+#sidebar a[data-toggle=collapse] {
+    position: relative
+}
+
+#sidebar .dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: none
+}
+
+#sidebar ul.components {
+    padding: 0 0
+}
+
+#sidebar ul p {
+    padding: 10px
+}
+
+#sidebar ul li a {
+    padding: .8rem 1.5rem;
+    font-size: 1rem;
+    display: block;
+    text-decoration: none;
+}
+
+#sidebar ul li a:hover,
+#sidebar ul li a.active {
+    color: #fff;
+    background: #2196f3
+}
+
+#sidebar ul li.active>a,
+#sidebar ul li.active a[aria-expanded=true] {
+    color: inherit
+}
+
+#sidebar ul ul a {
+    font-size: 1rem
+}
+
+@media(max-width: 768px) {
+    #sidebarCollapse span {
+        display: none
+    }
+}

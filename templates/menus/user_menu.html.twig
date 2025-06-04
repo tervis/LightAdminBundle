@@ -1,0 +1,20 @@
+<a href="#" id="nav2" class="nav-item nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="{{ userMenu.isNameDisplayed ?: 'd-none' }}">{{ userMenu.name }}</span><twig:ux:icon name="bi:gear" class="bi  ms-3"/>
+</a>
+<div class="dropdown-menu dropdown-menu-end nav-link-menu">
+    <ul class="nav-list">
+    {% for item in userMenu.items %}
+        {% if item.type == constant('Tervis\\LightADminBundle\\Dto\\MenuItem::TYPE_SECTION') %}
+            <div class="dropdown-divider"></div>
+        {% else %}
+            <li>
+                <a href="{{ path(item.routeName, item.routeParameters) }}" class="dropdown-item">
+                    {% if item.icon is not empty %}
+                    <twig:ux:icon name="{{ item.icon }}" class="bi me-2"/>
+                    {% endif %}
+                {{ item.label | trans }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</div>

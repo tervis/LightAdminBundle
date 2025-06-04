@@ -69,14 +69,14 @@
                             <td>
                                 <div class="form-check">
                                     <label class="form-check-label" for="batch-delete-{{entity.id}}">
-                                        <input class="form-check-input batch-delete" type="checkbox" value="{{ entity.id }}" id="batch-delete-{{entity.id}}">
+                                        <input class="form-check-input batch-delete-checkbox" type="checkbox" value="{{ entity.id }}" id="batch-delete-{{entity.id}}">
                                     </label>
                                 </div>
                             </td>
                             {% endif %}
-
+                            {% set enumFieldType = enum('Tervis\\LightAdminBundle\\Options\\FieldType') %}
                             {% for field in fields %}
-                                <td>
+                                <td {{field.type == enumFieldType.Boolean.value ? 'class="field-boolean"' : ''}}>
                                     {{ field_renderer.render_field(entity, field) }}
                                 </td>
                             {% endfor %}

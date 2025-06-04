@@ -1,6 +1,6 @@
 {# @LightAdmin/_layout.html.twig #}
 <!DOCTYPE html>
-<html lang="{%- block htmlLang -%}{{ app.request.locale|split('_')[0] }}{%- endblock -%}" class="{%- block html_class -%}h-100{%- endblock -%}" data-bs-theme="{%- block html_theme -%}dark{%- endblock -%}">
+<html lang="{%- block htmlLang -%}{{ app.request.locale|split('_')[0] }}{%- endblock -%}" class="{%- block html_class -%}h-100{%- endblock -%}" data-bs-theme="{%- block html_theme -%}dark{%- endblock -%}" data-turbo="false">
     <head>
         <base href="./">
         {%- block head_metas -%}
@@ -17,33 +17,59 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
 
         {% block head_favicon %}
-        {{ include('@LightAdmin/_partials/favicons.html.twig') }}
+            <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>LA</text></svg>">
         {% endblock %}
         
         {% block head_fonts %}
-        {#<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"/>#}
         {% endblock %}
         
         {% block stylesheets %}
-        {#<link rel="stylesheet" href="{{ asset('styles/app.css')}}" >
-        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css')}}" >#}
+            <link rel="stylesheet" href="{{ asset('dist/light-admin.css', 'lightadmin')}}" >
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('admin') }}{% endblock %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            <script src="{{ asset('dist/light-admin.js', 'lightadmin') }}"></script>
         {% endblock %}
         <!-- Page rendered on {{ 'now'|date('Y-m-d H:i:s', "Europe/Helsinki") }} -->
     </head>
 {% block dom %}
-<body id="{%- block body_id -%}light_admin{%- endblock -%}" class="{%- block body_class -%}d-flex flex-column h-100{%- endblock -%}">
+<body id="{%- block body_id -%}light_admin{%- endblock -%}" class="{%- block body_class -%}d-flex flex-column h-100 active{%- endblock -%}">
 {{ include('@LightAdmin/_partials/theme_switch.html.twig') }}
     <div class="wrapper">
-        {{ include('@LightAdmin/_partials/sidebar.html.twig') }}
+        {% block sidebar %}
+        {% set currentPath = app.request.attributes.get('_route') %}
+        <aside>
+            <nav id="sidebar" class="active">
+                <div class="sidebar-header">
+                    <span class="fs-2 p-2">MENU</span>
+                </div>
+                {{ main_menu(currentPath) }}
+            </nav>
+        </aside>
+        {% endblock %}
         <div id="wrapper-content">
-            {{ include('@LightAdmin/_partials/navbar.html.twig') }}
+            {% block navbar %}
+            <nav class="navbar navbar-expand-lg">
+                <button type="button" id="sidebarCollapse" class="btn btn-sm bg-transparent text-light">
+                    <twig:ux:icon name="bi:list" class="bi fs-3"/>
+                    <span></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <div class="nav-dropdown">
+                                {{ user_menu(app.user)}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            {% endblock %}
             <div class="content">
                 <div class="container-fluid m-1">
                     {{ include('@LightAdmin/_partials/flash_messages.html.twig') }}
+                    
                     <div class="row">
                         <div class="col-md-12 page-header">
                             {% if page_pretitle is defined %}

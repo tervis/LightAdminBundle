@@ -1,0 +1,19 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build src/light-admin.js src/light-admin.scss --dist-dir ../public/dist/",
+    "dev": "parcel src/light-admin.js src/light-admin.scss --dist-dir ../public/dist/ --open",
+    "clean": "rm -rf ../public/dist .parcel-cache"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.15.2",
+    "parcel": "^2.15.2"
+  }
+}

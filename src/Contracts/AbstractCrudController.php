@@ -326,15 +326,10 @@ abstract class AbstractCrudController extends AbstractController
     protected function batchDeleteAction(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         if (!isset($this->entityClass)) {
-            // It's better to configure this in the constructor or a dedicated setup method.
-            // Throwing an exception here is correct if it's truly not configured.
             throw new \LogicException('Entity class not configured. Call configureAdmin() in your controller.');
         }
 
-        // 1. Get token and items from JSON payload
         $data = $this->getJsonPayload($request);
-
-        dump($data);
 
         $token = $data['_token'] ?? null;
         $items = $data['items'] ?? [];
@@ -385,8 +380,10 @@ abstract class AbstractCrudController extends AbstractController
      */
     protected function toggleAction(Request $request, EntityManagerInterface $entityManager, PropertyAccessorInterface $propertyAccessor, $id): JsonResponse
     {
-        $token = $request->request->get('token');
-        $propertyPath = $request->request->get('propertyName');
+        $data = $this->getJsonPayload($request);
+
+        $token = $data['_token'] ?? null;
+        $propertyPath = $data['propertyName'] ?? null;
 
         $privateToken = sprintf('%s-switch-button-%s', $propertyPath, $id);
 
