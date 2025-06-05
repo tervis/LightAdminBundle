@@ -198,6 +198,8 @@ abstract class AbstractCrudController extends AbstractController
             throw new \LogicException('Form type class not configured. Call configureAdmin() in your controller.');
         }
 
+        $withCrudFields = true;
+
         $isNew = $entity === null;
         if ($isNew) {
             $entity = new ($this->entityClass)();
@@ -206,23 +208,17 @@ abstract class AbstractCrudController extends AbstractController
         $crud = $this->configureCrud(); // Get the CRUD configuration
         $fields = $this->getFields('form'); // Get fields configured for 'form' action
 
-        // Option 1: Use a generic form type and pass fields
+        // Use a generic form type and pass fields
         // This requires a custom 'AdminFormType' that can iterate over fields
-        $form = $this->createForm(CrudFormType::class, $entity, [
-            'crud_fields' => $fields, // Pass the Field objects to the form type
-        ]);
+        if ($this->formTypeClass instanceof CrudFormType) {
+            $form = $this->createForm(CrudFormType::class, $entity, [
+                'crud_fields' => $fields, // Pass the Field objects to the form type
+            ]);
+        } else {
+            $withCrudFields = false;
+            $form = $this->createForm($this->formTypeClass, $entity);
+        }
 
-        // Option 2: Dynamically build the form here (less ideal for separation of concerns)
-        // $formBuilder = $this->createFormBuilder($entity);
-        // foreach ($fields as $field) {
-        //     // Map Field::$fieldType to Symfony Form Type class
-        //     $symfonyFormType = $this->mapFieldTypeToSymfonyFormType($field->fieldType);
-        //     $formBuilder->add($field->propertyName, $symfonyFormType, $field->formOptions);
-        // }
-        // $form = $formBuilder->getForm();
-
-        //
-        //$form = $this->createForm($this->formTypeClass, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -243,10 +239,10 @@ abstract class AbstractCrudController extends AbstractController
             'redirectRoute' => $this->redirectRoute,
             'page_title' => $isNew ? 'Create new' : 'Edit',
             'page_pretitle' => $this->entityShortName,
-            'crud_fields' => $fields, // Pass fields to the Twig template for dynamic rendering
         ];
 
-        $context = array_merge($defaultContext, $context);
+        // Pass fields to the Twig template for dynamic rendering
+        $context = array_merge($defaultContext, $context, $withCrudFields ? ['crud_fields' => $fields,] : []);
 
         return $this->render($isNew ? $this->newTemplate : $this->editTemplate, $context);
     }

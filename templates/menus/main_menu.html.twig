@@ -1,21 +1,20 @@
-<ul class="list-unstyled components4 mt-1 ms-2">
-{# @var item \Tervis\LightAdminBundle\Dto\MenuItem #}
-
-
-{% for item in menu.items %}
-
-    {% if item.type == constant('Tervis\\LightADminBundle\\Dto\\MenuItem::TYPE_SECTION') %}
-    <li><hr/></li>
-    {% elseif item.type == constant('Tervis\\LightADminBundle\\Dto\\MenuItem::TYPE_SUBMENU') %}
+{# @var item App\Dto\MenuItem #}
+{# @var sub_item App\Dto\MenuItem #}
+{% macro render_menu(item, currentPath) %}
+    {% if item.type == constant('App\\Dto\\MenuItem::TYPE_SECTION') %}
+    <li class="border-bottom">
+        {% if item.label is not null %}<span class="ms-4 text-secondary text-uppercase">{{ item.label | trans }}</span>{% endif %}
+    </li>
+    {% elseif item.type == constant('App\\Dto\\MenuItem::TYPE_SUBMENU') %}
     <li>
-        <a href="#{{ item-label }}-menu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <a href="#{{ item.label }}-menu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
             <twig:ux:icon name='bi:gear' class="bi"/> {{ item.label | trans }}
         </a>
-        <ul class="collapse list-unstyled" id="{{ item-label }}-menu">
-            {% for item in menu.items %}
+        <ul class="collapse list-unstyled" id="{{ item.label }}-menu">
+            {% for sub_item in item.subItems %}
             <li>
-                <a href="{{ path(item.routeName, item.routeParameters) }}" class="{{- currentPath == item.routeName ? 'active' : '' -}}">
-                    <twig:ux:icon name='{{ item.icon }}' class="bi"/> {{ item.label | trans }}
+                <a href="{{ sub_item.routeName ? path(sub_item.routeName, sub_item.routeParameters) : '#' }}" class="{{- currentPath == sub_item.routeName ? 'active' : '' -}}">
+                    <twig:ux:icon name="{{ item.icon ?: 'bi:caret-right' }}" class="bi me-2"/> {{ sub_item.label | trans }}
                 </a>
             </li>
             {% endfor %}
@@ -23,51 +22,21 @@
     </li>
     {% else %}
     <li>
-        <a href="{{ path(item.routeName, item.routeParameters) }}" class="{{- currentPath == item.routeName ? 'active' : '' -}}">
-            <twig:ux:icon name='{{ item.icon }}' class="bi"/> {{ item.label | trans }}
+        <a href="{{ item.routeName ? path(item.routeName, item.routeParameters) : '#' }}" class="{{- currentPath == item.routeName ? 'active' : '' -}}">
+            <twig:ux:icon name="{{ item.icon ?: 'bi:caret-right' }}" class="bi"/> {{ item.label | trans }}
         </a>
     </li>
     {% endif %}
+{% endmacro %}
 
+<ul class="list-unstyled components4 mt-1 ms-2">
+{% for item in menu.items %}
+    {% if item.permission is defined and item.permission is not null %}
+        {% if is_granted(item.permission) %}
+        {{ _self.render_menu(item, currentPath) }}
+        {% endif %}
+    {% else %}
+        {{ _self.render_menu(item, currentPath) }}
+    {% endif %}
 {% endfor %}
-{#<li>
-    <a href="{{ path('admin_user_crud_index') }}" class="{{- is_active_route('admin_user_crud_index') -}}">
-        <twig:ux:icon name='bi:people' class="bi"/> {{ 'Users' | trans }}</a>
-</li>#}
-{#<li>
-    <a href="forms.html"><i class="bi bi-file-earmark-text"></i> Forms</a>
-</li>#}
-{#<li>
-    <a href="#variantsmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <twig:ux:icon name='bi:gear' class="bi"/> {{ 'Variants' | trans }}
-    </a>
-    <ul class="collapse list-unstyled" id="variantsmenu">
-        <li>
-            <a href="{{ path('admin_ticket_variant_crud_index') }}">
-                <twig:ux:icon name='bi:caret-right' class="bi"/> {{ 'Ticket variants' | trans }}
-            </a>
-        </li>
-        <li>
-            <a href="">
-                <twig:ux:icon name='bi:caret-right' class="bi"/> {{ 'Ticket services' | trans }}
-            </a>
-        </li>
-    </ul>
-</li>#}
-{#<li>
-    <a href="#authmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="bi bi-shield"></i> Authentication</a>
-    <ul class="collapse list-unstyled" id="authmenu">
-        <li>
-            <a href="login.html"><i class="bi bi-lock"></i> Login</a>
-        </li>
-        <li>
-            <a href="signup.html"><i class="bi bi-person-add"></i> Signup</a>
-        </li>
-        <li>
-            <a href="forgot-password.html"><i class="bi bi-person-lock"></i> Forgot password</a>
-        </li>
-    </ul>
-</li>#}
-
 </ul>
