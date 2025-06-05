@@ -6,7 +6,7 @@
     <ul class="pagination justify-content-center">
         {% if pagination.page > 1 %}
             <li class="page-item">
-                <a class="page-link" href="{{ path(redirectRoute, {'page': page - 1}) }}">{{ 'Previous' | trans }}</a>
+                <a class="page-link" href="{{ path(redirectRoute, {'page': pagination.page - 1}) }}">{{ 'Previous' | trans }}</a>
             </li>
         {% endif %}
         {% for i in 1..pagination.totalPages %}
