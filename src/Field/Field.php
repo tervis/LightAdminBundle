@@ -21,6 +21,7 @@ class Field implements FieldInterface
     public ?string $displayFormat = null; // For list/detail views: 'date_short', 'currency', 'boolean_icon'
     public ?string $template = null; // Custom Twig template for rendering this field
 
+    public array $choices = [];
     /**
      * For switch field and set only in asSwitch method
      *
@@ -106,7 +107,7 @@ class Field implements FieldInterface
     /**
      * Pages field is used
      *
-     * @param string ...$actions
+     * @param string ...$pages
      * @return self
      */
     public function showOn(string ...$pages): static
@@ -209,6 +210,22 @@ class Field implements FieldInterface
     {
         $this->fieldType = FieldType::Money->value;
         $this->displayFormat = $currency;
+        return $this;
+    }
+
+    public function asChoice(array $choices): self
+    {
+        $this->fieldType = FieldType::Choice->value;
+        $this->displayFormat = 'choice';
+        $this->addFormOption('choices', $choices);
+        return $this;
+    }
+
+    public function asArrayChoice(array $choices): self
+    {
+        $this->fieldType = FieldType::Array->value;
+        $this->displayFormat = 'choice';
+        $this->addFormOption('choices', $choices);
         return $this;
     }
 

@@ -3,10 +3,7 @@
 {% if crud_fields is defined %}
     {% for field in crud_fields %} {# Use crud_fields passed from controller #}
         {% if form[field.propertyName] is defined %}
-            {# You can apply custom styling here, or use themes #}
-            <div class="mb-3">
                 {{ form_row(form[field.propertyName]) }}
-            </div>
         {% endif %}
     {% endfor %}
 {% else %}

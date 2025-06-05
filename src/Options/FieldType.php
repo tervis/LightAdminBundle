@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tervis\LightAdminBundle\Options;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -12,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+use Tervis\LightAdminBundle\Form\Type\ArrayChoiceType;
+use Tervis\LightAdminBundle\Form\Type\JsonType;
 
 enum FieldType: string
 {
@@ -24,6 +28,8 @@ enum FieldType: string
     case Number = 'number';
     case Money = 'money';
     case Json = 'json';
+    case Choice = 'choice';
+    case Array = 'array';
 
     // Add more cases as needed, ensuring the string value matches your input strings
 
@@ -43,6 +49,9 @@ enum FieldType: string
             self::Email => EmailType::class,
             self::Number => NumberType::class,
             self::Money => MoneyType::class,
+            self::Choice => ChoiceType::class,
+            self::Json => JsonType::class,
+            self::Array => ArrayChoiceType::class,
             // If you add new cases, make sure to add them here as well.
         };
     }
